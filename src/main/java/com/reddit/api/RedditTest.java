@@ -23,7 +23,6 @@ public class RedditTest {
     private String getAuthToken(){
         RestTemplate restTemplate = new RestTemplate();
        HttpHeaders headers = new HttpHeaders();
-        //Different login details as I had to re-create the app
         headers.setBasicAuth("eI086suCMPVlJkUNPLiA2A", "6-XeehZqfO6-jN9rgdfKgEaYiKm3hA");
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.put("User-Agent",
