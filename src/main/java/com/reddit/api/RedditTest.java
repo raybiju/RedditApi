@@ -44,7 +44,7 @@ public class RedditTest {
         return String.valueOf(map.get("access_token"));
     }
 
-    public String readArticles(String subReddit) {
+    public String readArticles() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         String authToken = getAuthToken();
@@ -52,24 +52,25 @@ public class RedditTest {
         headers.put("User-Agent",
                 Collections.singletonList("\"Mozilla/5.0\"(by /u/Super_Consequence_83)"));
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        String url = "https://oauth.reddit.com/r/"+subReddit+"/hot";
+        String url = "https://oauth.reddit.com/r/politics/top";
         ResponseEntity<String> response
                 = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        System.out.println(response.getBody());
         return response.getBody();
     }
 
 
-    public void save()
+
+    public void searchEntireReddit()
     {
-         String json=readArticles("java");
-        Mongo mongo = new Mongo("localhost", 27017);
-        DB db = mongo.getDB("testdb");
-
-        DBCollection collection = db.getCollection("RedditData");
-
+        String json=readArticles();
+       Mongo mongo = new Mongo("localhost", 27017);
+        DB db = mongo.getDB("searchdb");
+        DBCollection collection = db.getCollection("SearchData");
         DBObject dbObject = (DBObject) JSON.parse(json);
         collection.insert(dbObject);
 
     }
+
 
 }

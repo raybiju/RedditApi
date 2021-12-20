@@ -4,7 +4,6 @@ public class RedditTestApplication {
     public static void main(String args[]) throws Exception
     {
         RedditTest test=new RedditTest();
-       // test.readArticles("java");
-        test.save();
+        test.searchEntireReddit();
     }
 }
